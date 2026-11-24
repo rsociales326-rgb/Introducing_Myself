@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Introducing Myself - Unit 1: Jobs</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-100 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+
+  <!-- Toast -->
+  <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="bg-slate-900 text-white px-4 py-3 rounded-xl shadow-lg flex items-center gap-3">
+      <i class="fa-solid fa-check text-emerald-400"></i>
+      <div>
+        <p id="toastTitle" class="text-sm font-semibold">Cleared</p>
+        <p id="toastMsg" class="text-xs text-slate-300">Your card is empty.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="bg-white border-b border-slate-200">
+    <div class="max-w-3xl mx-auto px-4 py-5">
+      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200 mb-2">
+        <i class="fa-solid fa-chalkboard-user text-amber-600"></i>
+        Teacher Verónica Hermida
+      </span>
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+        <div>
+          <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Introducing Myself</h1>
+          <p class="text-sm text-slate-600">Unit 1: Jobs • Fill in your card and introduce yourself.</p>
+        </div>
+        <span class="text-xs font-semibold text-blue-700 bg-blue-50 border border-blue-200 px-3 py-1.5 rounded-full self-start sm:self-auto">
+          1. Fill &rarr; 2. Present
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="flex-grow max-w-3xl w-full mx-auto px-4 py-6 space-y-6">
+
+    <!-- STEP 1: FORM -->
+    <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6">
+      <div class="flex items-center justify-between gap-3 pb-4 mb-5 border-b border-slate-100">
+        <div>
+          <h2 class="text-lg font-bold text-slate-900">1. Your Information</h2>
+          <p class="text-xs text-slate-500">Type your details to build your business card.</p>
+        </div>
+        <button type="button" onclick="resetCard()"
+                class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition">
+          <i class="fa-solid fa-eraser mr-1"></i> Clear
+        </button>
+      </div>
+
+      <form id="cardForm" autocomplete="off" onsubmit="return false;" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label for="fullName" class="block text-xs font-bold uppercase text-slate-600 mb-1">Full Name</label>
+          <input id="fullName" type="text" autocomplete="off" spellcheck="false" oninput="renderAll()"
+                 placeholder="e.g. Sofía Morales"
+                 class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500">
+        </div>
+
+        <div>
+          <label for="jobTitle" class="block text-xs font-bold uppercase text-slate-600 mb-1">Job Title</label>
+          <input id="jobTitle" type="text" autocomplete="off" spellcheck="false" oninput="renderAll()"
+                 placeholder="e.g. Marketing Coordinator"
+                 class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500">
+        </div>
+
+        <div>
+          <label for="companyName" class="block text-xs font-bold uppercase text-slate-600 mb-1">Company</label>
+          <input id="companyName" type="text" autocomplete="off" spellcheck="false" oninput="renderAll()"
+                 placeholder="e.g. Norte Digital"
+                 class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500">
+        </div>
+
+        <div>
+          <label for="country" class="block text-xs font-bold uppercase text-slate-600 mb-1">Country</label>
+          <input id="country" type="text" autocomplete="off" spellcheck="false" oninput="renderAll()"
+                 placeholder="e.g. Mexico"
+                 class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500">
+        </div>
+
+        <div>
+          <label for="nationality" class="block text-xs font-bold uppercase text-slate-600 mb-1">Nationality</label>
+          <input id="nationality" type="text" autocomplete="off" spellcheck="false" oninput="renderAll()"
+                 placeholder="e.g. Mexican"
+                 class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500">
+        </div>
+
+        <div>
+          <label for="whatIDo" class="block text-xs font-bold uppercase text-slate-600 mb-1">What I do (short phrase)</label>
+          <input id="whatIDo" type="text" autocomplete="off" spellcheck="false" oninput="renderAll()"
+                 placeholder="e.g. manage social media campaigns"
+                 class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500">
+        </div>
+      </form>
+    </section>
+
+    <!-- STEP 2: READY TO PRESENT -->
+    <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-6">
+      <div>
+        <h2 class="text-lg font-bold text-slate-900">2. Ready to Present</h2>
+        <p class="text-xs text-slate-500">Share your screen with this business card and read your introduction aloud.</p>
+      </div>
+
+      <!-- REAL BUSINESS CARD DESIGN -->
+      <div class="max-w-xl mx-auto rounded-2xl overflow-hidden shadow-md border border-slate-200 bg-gradient-to-br from-slate-900 via-slate-800 to-blue-950 text-white">
+        <div class="h-2 w-full bg-gradient-to-r from-amber-400 via-sky-400 to-blue-500"></div>
+
+        <div class="p-6 sm:p-7 flex flex-col justify-between min-h-[225px] gap-6">
+          <div class="flex items-center justify-between gap-3">
+            <span id="cardCompany" class="text-xs font-bold uppercase tracking-widest text-slate-400 truncate">
+              COMPANY NAME
+            </span>
+            <span class="text-[11px] uppercase tracking-wider text-slate-400">
+              Business Card
+            </span>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <div id="cardAvatar"
+                 class="w-14 h-14 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center text-lg font-extrabold text-amber-300 flex-shrink-0">
+              <i class="fa-regular fa-user text-slate-300"></i>
+            </div>
+            <div class="min-w-0">
+              <h3 id="cardName" class="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-400 truncate">
+                Your Name
+              </h3>
+              <p id="cardJob" class="text-sm font-medium text-slate-400 truncate mt-0.5">
+                Your Job Title
+              </p>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-white/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs">
+            <div class="flex items-center gap-2 truncate">
+              <i class="fa-solid fa-location-dot text-sky-300 w-4"></i>
+              <span id="cardOrigin" class="text-slate-400 truncate">Country • Nationality</span>
+            </div>
+            <div class="flex items-center gap-2 truncate">
+              <i class="fa-solid fa-briefcase text-amber-300 w-4"></i>
+              <span id="cardRole" class="italic text-slate-400 truncate">What I do in my job...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SPEAKING SCRIPT -->
+      <div class="rounded-xl bg-blue-50/70 border border-blue-200 p-4 sm:p-5">
+        <p class="text-xs font-bold uppercase tracking-wider text-blue-900 mb-2">
+          <i class="fa-solid fa-microphone mr-1 text-blue-600"></i> Say It Aloud
+        </p>
+        <p id="speakingScript" class="text-base sm:text-lg text-slate-800 leading-relaxed"></p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-white border-t border-slate-200 mt-4">
+    <div class="max-w-3xl mx-auto px-4 py-3.5 flex items-center justify-between text-xs text-slate-500">
+      <span>Unit 1: Jobs</span>
+      <span>Teacher Verónica Hermida</span>
+    </div>
+  </footer>
+
+  <script>
+    function esc(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }
+
+    function fillSlot(val, fallback) {
+      if (val) {
+        return `<span class="px-1.5 py-0.5 rounded bg-white border border-blue-300 text-blue-950 font-bold">${esc(val)}</span>`;
+      }
+      return `<span class="px-1.5 py-0.5 rounded bg-white/80 border border-blue-200 text-slate-400">${fallback}</span>`;
+    }
+
+    function renderAll() {
+      const name = document.getElementById('fullName').value.trim();
+      const job = document.getElementById('jobTitle').value.trim();
+      const company = document.getElementById('companyName').value.trim();
+      const country = document.getElementById('country').value.trim();
+      const nationality = document.getElementById('nationality').value.trim();
+      const whatIDo = document.getElementById('whatIDo').value.trim().replace(/\.$/, '');
+
+      const compEl = document.getElementById('cardCompany');
+      compEl.textContent = company ? company.toUpperCase() : 'COMPANY NAME';
+      compEl.className = company
+        ? 'text-xs font-bold uppercase tracking-widest text-amber-300 truncate'
+        : 'text-xs font-bold uppercase tracking-widest text-slate-400 truncate';
+
+      const nameEl = document.getElementById('cardName');
+      const avatarEl = document.getElementById('cardAvatar');
+      if (name) {
+        nameEl.textContent = name;
+        nameEl.className = 'text-xl sm:text-2xl font-extrabold tracking-tight text-white truncate';
+        const parts = name.split(/\s+/).filter(Boolean);
+        avatarEl.textContent = parts.length === 1
+          ? parts[0].slice(0, 2).toUpperCase()
+          : (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+      } else {
+        nameEl.textContent = 'Your Name';
+        nameEl.className = 'text-xl sm:text-2xl font-extrabold tracking-tight text-slate-400 truncate';
+        avatarEl.innerHTML = '<i class="fa-regular fa-user text-slate-300"></i>';
+      }
+
+      const jobEl = document.getElementById('cardJob');
+      jobEl.textContent = job || 'Your Job Title';
+      jobEl.className = job ? 'text-sm font-medium text-sky-300 truncate mt-0.5' : 'text-sm font-medium text-slate-400 truncate mt-0.5';
+
+      const originEl = document.getElementById('cardOrigin');
+      if (country || nationality) {
+        originEl.textContent = [country, nationality].filter(Boolean).join(' • ');
+        originEl.className = 'text-white truncate';
+      } else {
+        originEl.textContent = 'Country • Nationality';
+        originEl.className = 'text-slate-400 truncate';
+      }
+
+      const roleEl = document.getElementById('cardRole');
+      roleEl.textContent = whatIDo ? `I ${whatIDo}.` : 'What I do in my job...';
+      roleEl.className = whatIDo ? 'italic text-amber-200 truncate' : 'italic text-slate-400 truncate';
+
+      document.getElementById('speakingScript').innerHTML =
+        `"Hello! My name is ${fillSlot(name, 'name')}. ` +
+        `I'm a/an ${fillSlot(job, 'job')} at ${fillSlot(company, 'company')}. ` +
+        `I'm from ${fillSlot(country, 'country')}, so I'm ${fillSlot(nationality, 'nationality')}. ` +
+        `In my job, I ${fillSlot(whatIDo, 'what you do')}."`;
+    }
+
+    function resetCard() {
+      document.getElementById('cardForm').reset();
+      renderAll();
+      showToast('Cleared', 'Your card is empty.');
+    }
+
+    let toastTimer;
+    function showToast(title, msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toastTitle').textContent = title;
+      document.getElementById('toastMsg').textContent = msg;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 2200);
+    }
+
+    window.onload = () => {
+      document.getElementById('cardForm').reset();
+      renderAll();
+    };
+  </script>
+</body>
+</html>
